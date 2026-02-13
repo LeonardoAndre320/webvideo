@@ -1,0 +1,41 @@
+html{
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
+}
+
+main{
+    position: absolute;
+    left: 0;
+    top:0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+
+    width: 500px;
+    height: 220px;
+
+    #btn_login{
+        width: 200px;
+    }
+
+    #btn_register{
+        position: absolute;
+        right: 10px;
+
+        width: 200px;
+    }
+
+    input{
+        margin-top: 30px;
+        width: calc(100% - 15px);
+        height: 25px;
+    }
+
+    #btn_continue{
+        position: absolute;
+        right: 10px;
+        bottom: 10px;
+    }
+}
