@@ -1,6 +1,77 @@
-.player_box{
+.player_box {
     background-color: red;
     width: 80%;
     margin: auto;
     aspect-ratio: 16 / 9;
+}
+
+.video_options {
+    width: calc(100% - 20px);
+
+    margin: 10px 0;
+    padding: 10px;
+
+
+    h2,
+    p {
+        margin: 5px;
+    }
+
+    .interaction_bar {
+        position: relative;
+        display: flex;
+        gap: 10px;
+        align-items: center;
+
+        #btn_like {
+            position: absolute;
+            right: 340px;
+        }
+
+        #btn_dislike {
+            position: absolute;
+            right: 230px;
+        }
+
+        #btn_share {
+            position: absolute;
+            right: 120px;
+        }
+
+        #btn_report {
+            position: absolute;
+            right: 10px;
+        }
+    }
+}
+
+.comments {
+    width: calc(100% - 20px);
+
+    margin: 10px 0;
+    padding: 10px;
+
+    .own_comment {
+
+        margin: 10px 0;
+        display: flex;
+
+        align-items: center;
+
+        #txt_own_comment {
+            margin: 5px;
+            height: 30px;
+            flex: 1;
+            border-radius: 10px;
+        }
+    }
+
+    .comment_block {
+        margin: 10px 0;
+
+        background-color: var(--input_text_background_color);
+        border-radius: 10px;
+
+        padding: 10px;
+    }
 }

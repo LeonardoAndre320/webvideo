@@ -26,6 +26,15 @@
     </header>
 
     <main>
+        <div>
+            <a href="/login">login</a>
+            <br>
+            <a href="/login/code">login/code</a>
+            <br>
+            <a href="/player">player</a>
+
+        </div>
+
         <h2>Mais recentes:</h2>
         <div class="video_preview">
 

@@ -12,7 +12,7 @@ main {
         gap: 10px;
 
 
-        & .video_preview_block {
+        .video_preview_block {
             position: relative;
             width: 300px;
             height: 160px;
@@ -20,12 +20,12 @@ main {
 
             cursor: pointer;
 
-            & .img_video_preview {
+            .img_video_preview {
                 width: 300px;
                 height: 160px;
             }
 
-            & .pnl_video_video_info {
+            .pnl_video_video_info {
                 position: absolute;
                 bottom: 0;
 
@@ -34,7 +34,7 @@ main {
                 width: 300px;
                 height: 20px;
 
-                & .lbl_video_name {
+                .lbl_video_name {
                     position: absolute;
                     left: 0;
                     bottom: 0;
@@ -42,7 +42,7 @@ main {
                     margin: 0;
                 }
 
-                & .lbl_video_view_count {
+                .lbl_video_view_count {
                     position: absolute;
                     right: 0;
                     bottom: 0;

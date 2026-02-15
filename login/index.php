@@ -22,9 +22,15 @@
         <button id="btn_login">Login</button>
         <button id="btn_register">Cadrastrar</button>
         <br>
-        <input id="txt_email" type="text" placeholder="E-mail" >
+        <input id="txt_email" type="text" placeholder="E-mail">
         <br>
-        <input id="txt_password" type="password" placeholder="Senha" >
+        <input id="txt_password" type="password" placeholder="Senha">
+        <br>
+        <label id="lbl_forgot_password">
+            <input type="checkbox" name="forgot_password" id="ckb_forgot_password">
+            Esqueci minha senha
+        </label>
+
         <br>
         <button id="btn_continue">Continuar</button>
     </main>

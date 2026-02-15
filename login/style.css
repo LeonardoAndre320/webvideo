@@ -26,6 +26,20 @@ main{
         height: 25px;
     }
 
+    #lbl_forgot_password
+    {
+        display: flex;
+        gap:5px;
+        align-items: center;
+        margin-left: 5px;
+    }
+
+    #ckb_forgot_password
+    {
+        margin: 0;
+        width: unset;
+    }
+
     #btn_continue{
         position: absolute;
         right: 10px;
