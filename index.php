@@ -15,7 +15,7 @@
 
 <body>
 
-    <header>
+    <header class="main_bar">
         <h2 id="lbl_title_page">Web Video</h2>
 
         <input type="text" id="txt_main_search">

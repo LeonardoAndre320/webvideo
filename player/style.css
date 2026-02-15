@@ -1,0 +1,6 @@
+.player_box{
+    background-color: red;
+    width: 80%;
+    margin: auto;
+    aspect-ratio: 16 / 9;
+}

@@ -75,3 +75,28 @@ input::placeholder,
 textarea::placeholder {
     color: var(--input_placeholder_color);
 }
+
+header, #main_bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    #lbl_title_page
+    {
+        cursor: pointer;
+    }
+
+    & #txt_main_search {
+        flex: 1;
+
+        height: 28px;
+
+        margin-right: -10px;
+
+        border-radius: 10px 0 0 10px;
+    }
+
+    & #btn_main_search {
+        border-radius: 0 10px 10px 0;
+    }
+}

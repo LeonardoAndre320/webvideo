@@ -3,26 +3,6 @@
     --video_preview_video_info_background_color: rgb(17, 17, 17);
 }
 
-header {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-
-    & #txt_main_search {
-        flex: 1;
-
-        height: 28px;
-
-        margin-right: -10px;
-
-        border-radius: 10px 0 0 10px;
-    }
-
-    & #btn_main_search {
-        border-radius: 0 10px 10px 0;
-    }
-}
-
 main {
 
     .video_preview {

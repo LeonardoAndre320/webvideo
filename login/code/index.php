@@ -19,6 +19,8 @@
         <br>
         <input id="txt_code" type="text" placeholder="Código" >
         <br>
+        <button id="btn_resend">Reenviar</button>
+
         <button id="btn_continue">Continuar</button>
     </main>
 
