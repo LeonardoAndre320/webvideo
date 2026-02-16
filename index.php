@@ -32,6 +32,10 @@
             <a href="/login/code">login/code</a>
             <br>
             <a href="/player">player</a>
+            <br>
+            <a href="/account">account</a>
+            <br>
+            <a href="/history">history</a>
 
         </div>
 
@@ -73,7 +77,7 @@
 
         </div>
 
-        <h2>Mais vistos:</h2>   
+        <h2>Mais vistos:</h2>
         <div class="video_preview">
 
             <div class="video_preview_block">

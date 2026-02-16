@@ -1,0 +1,37 @@
+.video_block {
+    position: relative;
+    background-color: var(--panel_background_color);
+
+    width: calc(100% - 20px);
+
+    padding: 10px;
+    border-radius: 10px;
+    margin: 10px 0;
+
+    cursor: pointer;
+
+    .thumbnail_preview{
+        width: 100px;
+        aspect-ratio: 16/9;
+    }
+
+    .lbl_title_history{
+        position: absolute;
+        left: 120px;
+        top:10px;
+
+        margin: 0;
+    }
+
+    .lbl_viewed_on{
+        position: absolute;
+        left: 120px;
+        bottom: 10px;
+
+        margin: 0;
+    }
+}
+
+.video_block:hover {
+    background-color: var(--panel_background_color_hover);
+}

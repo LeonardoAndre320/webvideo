@@ -1,6 +1,8 @@
 :root {
     --page_background_color: #272727;
     --text_color: whitesmoke;
+    --panel_background_color:#555555;
+    --panel_background_color_hover:#666666;
 
     /* POSITION */
     --general_max_width: 1300px;

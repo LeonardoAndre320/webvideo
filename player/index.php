@@ -52,6 +52,14 @@
                 <h3>Nome do usuario</h3>
                 <p>comentario</p>
             </div>
+            <div class="comment_block">
+                <h3>Nome do usuario</h3>
+                <p>comentario</p>
+            </div>
+            <div class="comment_block">
+                <h3>Nome do usuario</h3>
+                <p>comentario</p>
+            </div>
         </div>
     </main>
 
