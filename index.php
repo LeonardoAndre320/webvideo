@@ -40,6 +40,8 @@
             <a href="/upload">upload</a>
             <br>
             <a href="/uploads">uploads</a>
+            <br>
+            <a href="/uploads/video">uploads/video</a>
 
         </div>
 
