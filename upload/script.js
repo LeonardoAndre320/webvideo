@@ -1,0 +1,1 @@
+document.getElementById('lbl_title_page').addEventListener('click',() =>{window.location.assign("/");})

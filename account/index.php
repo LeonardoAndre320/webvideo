@@ -31,6 +31,9 @@
         <p>Visualizações totais:123</p>
         <p>Media de aprovação: 50% 👍123 | 123👎 </p>
         <button>Historico</button>
+        <button>Uploads</button>
+        <br>
+        <br>
         <button>Salvar</button>
     </main>
 

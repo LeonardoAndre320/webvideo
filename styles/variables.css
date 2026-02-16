@@ -20,6 +20,7 @@
     /* BUTTON */
     --buttom_background_color: #555555;
     --button_background_color_hover: #666666;
+    --button_border:1px whitesmoke solid;
 
     /* INPUT */
     --input_text_background_color: #555555;

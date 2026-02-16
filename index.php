@@ -36,6 +36,10 @@
             <a href="/account">account</a>
             <br>
             <a href="/history">history</a>
+            <br>
+            <a href="/upload">upload</a>
+            <br>
+            <a href="/uploads">uploads</a>
 
         </div>
 
