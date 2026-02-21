@@ -35,7 +35,9 @@
         <button id="btn_continue">Continuar</button>
     </main>
 
+    <script src="/scripts/warnings.js"></script>
     <script src="script.js"></script>
+
 </body>
 
 </html>

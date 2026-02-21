@@ -1,0 +1,36 @@
+.warning_box {
+    position: fixed;
+    top:20px;
+    right: 20px;
+    width: 400px;
+    border-radius: 10px;
+    padding: 10px;
+
+    display: flex;
+    align-items: center;
+    gap:10px;
+
+    z-index: 999999;
+
+    h3, p{
+        margin: 0;
+    }
+}
+
+.warning_box.alert{
+    background-color: #775b05;
+}
+.warning_box.error{
+    background-color: rgb(126, 0, 0);
+}
+.warning_box.notice{
+    background-color: rgb(49, 49, 216);
+}
+
+.warning_box .warning_btn_close{
+    position: absolute;
+    right: 10px;
+    width: 30px;
+
+    border: solid 1px whitesmoke;
+}

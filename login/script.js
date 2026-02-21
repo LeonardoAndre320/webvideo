@@ -56,3 +56,7 @@ btn_register.addEventListener('mouseleave', () => {
     else
         btn_register.style.backgroundColor = button_background_color;
 });
+
+show_warning('error','Mensagem de erro');
+show_warning('alert','Mensagem de alerta');
+show_warning('notice','Mensagem de aviso');
