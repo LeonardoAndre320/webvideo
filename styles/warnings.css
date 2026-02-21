@@ -18,13 +18,13 @@
 }
 
 .warning_box.alert{
-    background-color: #775b05;
+    background-color: var(--warning_alert_background_color);
 }
 .warning_box.error{
-    background-color: rgb(126, 0, 0);
+    background-color: var(--warning_error_background_color);
 }
 .warning_box.notice{
-    background-color: rgb(49, 49, 216);
+    background-color: var(--warning_notice_background_color);
 }
 
 .warning_box .warning_btn_close{
@@ -32,5 +32,5 @@
     right: 10px;
     width: 30px;
 
-    border: solid 1px whitesmoke;
+    border: solid 1px var(--warning_btn_close_border_color);
 }

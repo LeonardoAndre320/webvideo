@@ -30,4 +30,10 @@
     /* INPUT */
     --input_text_background_color: #555555;
     --input_placeholder_color:rgb(194, 194, 194);
+
+    /* WARNINGS */
+    --warning_alert_background_color:#775b05;
+    --warning_error_background_color:rgb(126, 0, 0);
+    --warning_notice_background_color:rgb(49, 49, 216);
+    --warning_btn_close_border_color:whitesmoke;
 }
