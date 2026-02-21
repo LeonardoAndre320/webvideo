@@ -10,14 +10,14 @@ main{
     height: 220px;
 
     #btn_login{
-        width: 200px;
+        width: calc((100% - 20px) / 2);
     }
 
     #btn_register{
         position: absolute;
         right: 10px;
 
-        width: 200px;
+        width: calc((100% - 20px) / 2);
     }
 
     input{

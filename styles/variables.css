@@ -22,6 +22,11 @@
     --button_background_color_hover: #666666;
     --button_border:1px whitesmoke solid;
 
+    --button_backgorund_color_click:rgb(0, 105, 0);
+    --button_background_color_selected:rgb(0, 105, 0);
+    --button_background_color_selected_hover:rgb(0, 146, 0);
+
+
     /* INPUT */
     --input_text_background_color: #555555;
     --input_placeholder_color:rgb(194, 194, 194);
