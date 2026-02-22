@@ -1,4 +1,5 @@
 <?php
+require_once $_SERVER['DOCUMENT_ROOT'] . '/db_connection.php';
 header('Content-Type: application/json');//Cabeçalho da resposta json
 
 $input = json_decode('php://input', true);
@@ -37,7 +38,7 @@ function login($args = [])
     $password = trim($args['password'] ?? '');
     $forgot = $args['forgot'] ?? false;
 
-    if (!filter_var($email,FILTER_VALIDATE_EMAIL)) {
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         return [
             'status' => 'error',
             'message' => 'Email not valid',
@@ -60,6 +61,15 @@ function login($args = [])
             'data' => $password
         ];
     }
+
+    $hash = 'SENHA VINDO DO BANCO';
+
+    if (password_verify($password, $hash)) {
+        //Senha certa
+    } else {
+        //Senha errada
+    }
+
 }
 
 function register($args = [])
@@ -67,7 +77,7 @@ function register($args = [])
     $email = trim($args['email'] ?? '');
     $password = trim($args['password'] ?? '');
 
-    if (!filter_var($email,FILTER_VALIDATE_EMAIL)) {
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         return [
             'status' => 'error',
             'message' => 'Email not valid',
@@ -82,6 +92,24 @@ function register($args = [])
             'data' => $password
         ];
     }
+
+    //SENHA PARA HASH
+    $hash = password_hash($password, PASSWORD_DEFAULT);
+
+    $pdo = database::get_connection();
+
+    $code = 0;
+
+    $expires_at = date('Y-m-d H:i:s', time() + 600); // 10 minutos
+
+
+    $stmt = $pdo->prepare('INSERT INTO user_pending (email, pass_hash, code, expires_at) VALUES (:email,:pass_hash,:code,:expires_at)');
+    $stmt->bindValue(':email', $email);
+    $stmt->bindValue(':pass_hash', $hash);
+    $stmt->bindValue(':code', $code);
+    $stmt->bindValue(':expires_at', $expires_at);
+    $stmt->execute();
+
 }
 
 //Envio final
