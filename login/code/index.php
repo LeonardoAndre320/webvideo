@@ -1,4 +1,9 @@
 <?php
+//Dependencias do composer/phpmailer
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+require $_SERVER['DOCUMENT_ROOT'] . 'vendor/autoload.php';
+
 require_once $_SERVER['DOCUMENT_ROOT'] . '/db_connection.php';
 session_start();
 
@@ -27,7 +32,37 @@ if ($email !== '' && $hash !== '') {
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
     } while (!empty($result));
 
-    
+    //Envia o email
+    $mail = new PHPMailer(true);
+    $mail->SMTPDebug = 2;
+
+    try{
+        //Configurações de servidor
+        $mail->isSMTP();
+        $mail->Host = $_ENV['MAIL_HOST'];
+        $mail->SMTPAuth = true;
+        $mail->Username = $_ENV['MAIL_USERNAME'];
+        $mail->Password = $_ENV['MAIL_PASSWORD'];
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        $mail->Port = $_ENV['MAIL_PORT'];
+
+        //Destinatario
+        $mail->setFrom($_ENV['MAIL_USERNAME'],'Código de webvideo');
+        $mail->addAddress($email);//email do usuario
+
+        //Conteudo do email
+        $mail->isHTML(true);
+        $mail->Subject = 'Seu código de verificação';
+        $mail->Body = 'Seu código de verificação é <b>' . $code .'</b><br>Ele expira em 10 minutos.';
+
+        $mail->send();
+
+        $text = 'Código de verificação enviado para " ' . $email . ' "';
+    }
+    catch(Exception)
+    {
+        $text = 'Algo deu errado ao enviar seu código de verificação. :(</h3><br><h3>Erro: ' . $mail->ErrorInfo;
+    }
 
 } else {
     $text = 'Algo deu errado :(';
