@@ -1,72 +1,78 @@
 <?php
 //Dependencias do composer/phpmailer
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
-require $_SERVER['DOCUMENT_ROOT'] . 'vendor/autoload.php';
+//use PHPMailer\PHPMailer\PHPMailer;
+//use PHPMailer\PHPMailer\Exception;
+//require $_SERVER['DOCUMENT_ROOT'] . 'vendor/autoload.php';
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/db_connection.php';
-session_start();
+require_once $_SERVER['DOCUMENT_ROOT'] . '/utils/str.php';
 
-if (!isset($_SESSION['last_activity'])) {
-    $_SESSION['last_activity'] = time();
-}
+$error = false;
+$message = '';
+$text = '';
 
-if (time() - $_SESSION['last_activity'] >= 600) {
-    session_destroy();
-}
-
-$email = $_SESSION['email'] ?? '';
-$hash = $_SESSION['hash'] ?? '';
-$text;
+$email;
 $code;
 
-if ($email !== '' && $hash !== '') {
+//Busca o email relacionado ao código
+if (!empty($_COOKIE['code_email'])) {
+    $email = $_COOKIE['code_email'];
+    $cens_email = censor_string($email, 3);
 
-    //Gera um novo código de 6 digitos
-    $pdo = database::get_connection();
-    do {
-        $code = random_int(100000, 999999);
-        $stmt = $pdo->prepare('SELECT code FROM user_pending where code = :code');
-        $stmt->bindValue(':code', $code);
+    try {
+        $pdo = database::get_connection();
+        $stmt = $pdo->prepare('SELECT * FROM user_pending WHERE email = :email ORDER BY expires_at DESC LIMIT 1');
+        $stmt->bindValue(':email', $email);
         $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
-    } while (!empty($result));
 
-    //Envia o email
-    $mail = new PHPMailer(true);
-    $mail->SMTPDebug = 2;
+        if (!$result) {
+            $error = true;
+            $message = "Nenhum código esperado para $cens_email";
+            return;
+        }
 
-    try{
-        //Configurações de servidor
-        $mail->isSMTP();
-        $mail->Host = $_ENV['MAIL_HOST'];
-        $mail->SMTPAuth = true;
-        $mail->Username = $_ENV['MAIL_USERNAME'];
-        $mail->Password = $_ENV['MAIL_PASSWORD'];
-        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-        $mail->Port = $_ENV['MAIL_PORT'];
-
-        //Destinatario
-        $mail->setFrom($_ENV['MAIL_USERNAME'],'Código de webvideo');
-        $mail->addAddress($email);//email do usuario
-
-        //Conteudo do email
-        $mail->isHTML(true);
-        $mail->Subject = 'Seu código de verificação';
-        $mail->Body = 'Seu código de verificação é <b>' . $code .'</b><br>Ele expira em 10 minutos.';
-
-        $mail->send();
-
-        $text = 'Código de verificação enviado para " ' . $email . ' "';
+        $code = $result['code'];
+    } catch (Exception) {
+        $error = true;
+        $message = "Erro interno.";
     }
-    catch(Exception)
-    {
-        $text = 'Algo deu errado ao enviar seu código de verificação. :(</h3><br><h3>Erro: ' . $mail->ErrorInfo;
-    }
-
-} else {
-    $text = 'Algo deu errado :(';
+    //Evia o código via email
 }
+
+
+// //Envia o email
+// $mail = new PHPMailer(true);
+// $mail->SMTPDebug = 2;
+
+// try{
+//     //Configurações de servidor
+//     $mail->isSMTP();
+//     $mail->Host = $_ENV['MAIL_HOST'];
+//     $mail->SMTPAuth = true;
+//     $mail->Username = $_ENV['MAIL_USERNAME'];
+//     $mail->Password = $_ENV['MAIL_PASSWORD'];
+//     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+//     $mail->Port = $_ENV['MAIL_PORT'];
+
+//     //Destinatario
+//     $mail->setFrom($_ENV['MAIL_USERNAME'],'Código de webvideo');
+//     $mail->addAddress($email);//email do usuario
+
+//     //Conteudo do email
+//     $mail->isHTML(true);
+//     $mail->Subject = 'Seu código de verificação';
+//     $mail->Body = 'Seu código de verificação é <b>' . $code .'</b><br>Ele expira em 10 minutos.';
+
+//     $mail->send();
+
+//     $text = 'Código de verificação enviado para " ' . $email . ' "';
+// }
+// catch(Exception)
+// {
+//     $text = 'Algo deu errado ao enviar seu código de verificação. :(</h3><br><h3>Erro: ' . $mail->ErrorInfo;
+// }
+
 
 
 

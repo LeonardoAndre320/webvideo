@@ -1,6 +1,6 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . '/db_connection.php';
-header('Content-Type: application/json');//Cabeçalho da resposta json
+header('Content-Type: application/json'); //Cabeçalho da resposta json
 
 $input = json_decode('php://input', true);
 $func = $input['func'] ?? null;
@@ -20,9 +20,9 @@ $allowed_functions = [
 ];
 
 //Chamada de funções
-if ($func && in_array($func, $allowed_functions)) {//Se existe e esta na lista
+if ($func && in_array($func, $allowed_functions)) { //Se existe e esta na lista
     try {
-        $response = call_user_func($func, $args);//Chama a função e o retorno dela vai para $response
+        $response = call_user_func($func, $args); //Chama a função e o retorno dela vai para $response
     } catch (Exception) {
         $response = [
             'status' => 'error',
@@ -69,7 +69,6 @@ function login($args = [])
     } else {
         //Senha errada
     }
-
 }
 
 function register($args = [])
@@ -95,22 +94,60 @@ function register($args = [])
 
     //SENHA PARA HASH
     $hash = password_hash($password, PASSWORD_DEFAULT);
-
-    $pdo = database::get_connection();
-
     $code = 0;
+    do{
+            $code = random_int(100000,999999);
 
-    $expires_at = date('Y-m-d H:i:s', time() + 600); // 10 minutos
+            $pdo = database::get_connection();
+
+            $stmt = $pdo->prepare('SELECT 1 FROM user_pending WHERE code = :code LIMIT 1');
+            $stmt->bindValue(':code',$code);
+            $stmt->execute();
+
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    }while($result);
 
 
-    $stmt = $pdo->prepare('INSERT INTO user_pending (email, pass_hash, code, expires_at) VALUES (:email,:pass_hash,:code,:expires_at)');
-    $stmt->bindValue(':email', $email);
-    $stmt->bindValue(':pass_hash', $hash);
-    $stmt->bindValue(':code', $code);
-    $stmt->bindValue(':expires_at', $expires_at);
-    $stmt->execute();
+    if(!save_code($email,$hash,$code))
+        {
+            return [
+                'status' => 'error',
+                'message' => 'Error saving code to database',
+                'data' => null
+            ];
+        }
 
 }
 
+//Salva o código temporariamente para verificação
+function save_code($email, $pass_hash, $code)
+{
+    try {
+        //Cookie para se lembrar caso o ususario feche o navegador para buscar o código
+        setcookie(
+            'code_email',
+            $email,
+            [
+                'expires' => time() + 600,
+                'path' => '/',
+                'secure' => true,
+                'httponly' => true,
+                'samesite' => 'Lax'
+                ]
+            );
+
+        $pdo = database::get_connection();
+        $expires_at = date('Y-m-d H:i:s', time() + 600); //Agora + 10 minutos
+
+        $stmt = $pdo->prepare('INSERT INTO user_pending (email,pass_hash,code,expires_at) VALUES (:email,:pass_hash,:code,:expires_at)');
+        $stmt->bindValue(':email', $email);
+        $stmt->bindValue(':pass_hash', $pass_hash);
+        $stmt->bindValue(':code', $code);
+        $stmt->bindValue(':expires_at', $expires_at);
+        return true;
+    } catch (Exception) {
+        return false;
+    }
+}
 //Envio final
 echo json_encode($response);
