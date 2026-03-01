@@ -7,6 +7,7 @@
 
 # data.env
 ## Arquivo com dados de ambiente
+Colocar uma pasta acima do diretorio web
 ## Conteudo:
 - DB_HOST=
 - DB_USER=
